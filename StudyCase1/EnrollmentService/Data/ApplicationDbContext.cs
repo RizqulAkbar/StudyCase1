@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StudyCase1.Models;
+using EnrollmentService.Models;
 
-namespace StudyCase1.Data
+namespace EnrollmentService.Data
 {
     public class ApplicationDbContext : DbContext
     {

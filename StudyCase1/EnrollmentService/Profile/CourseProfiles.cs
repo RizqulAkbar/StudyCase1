@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
-using StudyCase1.DTO;
-using StudyCase1.Models;
+using EnrollmentService.DTO;
+using EnrollmentService.Models;
 
-namespace StudyCase1.Profiles
+namespace EnrollmentService.Profiles
 {
-    public class CourseProfiles
+    public class CourseProfiles : Profile
+
     {
-        public class CourseProfile : Profile
-        {
-            public CourseProfile()
+            public CourseProfiles()
             {
                 CreateMap<Course, CourseDTO>()
                     .ForMember(dest => dest.TotalHours,
@@ -16,9 +15,6 @@ namespace StudyCase1.Profiles
 
                 CreateMap<CourseForCreateDTO, Course>();
 
-
-
             }
-        }
     }
 }

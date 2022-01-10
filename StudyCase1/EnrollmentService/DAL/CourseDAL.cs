@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using StudyCase1.Data;
-using StudyCase1.DTO;
-using StudyCase1.Models;
+using EnrollmentService.Data;
+using EnrollmentService.DTO;
+using EnrollmentService.Models;
 
-namespace StudyCase1.DAL
+namespace EnrollmentService.DAL
 {
     public class CourseDAL : ICourse
     {

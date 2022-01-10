@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using StudyCase1.DTO;
+using EnrollmentService.DTO;
 
-namespace StudyCase1.ValidationAttributes
+namespace EnrollmentService.ValidationAttributes
 {
     public class StudentFirstlastMustBeDiffAttribute : ValidationAttribute
     {

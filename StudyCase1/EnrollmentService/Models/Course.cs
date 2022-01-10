@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
-namespace StudyCase1.Models
+namespace EnrollmentService.Models
 {
     public class Course
     {

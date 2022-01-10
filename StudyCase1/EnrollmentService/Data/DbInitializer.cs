@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using StudyCase1.Models;
+using EnrollmentService.Models;
 
-namespace StudyCase1.Data
+namespace EnrollmentService.Data
 {
     public static class DbInitializer
     {

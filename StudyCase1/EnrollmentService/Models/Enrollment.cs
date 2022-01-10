@@ -1,4 +1,6 @@
-﻿namespace StudyCase1.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EnrollmentService.Models
 {
     public enum Grade
     {
@@ -6,6 +8,7 @@
     }
     public class Enrollment
     {
+        [Key]
         public int EnrollmentID { get; set; }
         public int CourseID {get; set;}
         public int StudentID { get; set;}

@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StudyCase1.Models;
+using EnrollmentService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using StudyCase1.Data;
+using EnrollmentService.Data;
 using System.Threading.Tasks;
 using AutoMapper;
-using StudyCase1.DTO;
+using EnrollmentService.DTO;
 using Microsoft.AspNetCore.Authorization;
 
-namespace StudyCase1.Controllers
+namespace EnrollmentService.Controllers
 {
     [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]

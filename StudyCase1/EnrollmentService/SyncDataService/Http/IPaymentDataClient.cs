@@ -1,10 +1,11 @@
 ﻿using EnrollmentService.Dtos;
+using EnrollmentService.Models;
 using System.Threading.Tasks;
 
 namespace EnrollmentService.SyncDataService.Http
 {
     public interface IPaymentDataClient
     {
-        Task SendPlatformToCommand(EnrollmentReadDTO plat);
+        Task SendEnrollmentToPayment(Enrollment enroll);
     }
 }

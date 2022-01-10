@@ -1,9 +1,14 @@
-﻿namespace EnrollmentService.Dtos
+﻿using EnrollmentService.Models;
+
+namespace EnrollmentService.Dtos
 {
-    public class EnrollmentReadDTO
+    public class EnrollmentReadDto
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Credits { get; set; }
+        public int EnrollmentId { get; set; }
+        public string CourseId { get; set; }
+        public string StudentId { get; set; }
+        public Grade? Grade { get; set; }
+        public Course Courses { get; set; }
+        public Student Students { get; set; }
     }
 }

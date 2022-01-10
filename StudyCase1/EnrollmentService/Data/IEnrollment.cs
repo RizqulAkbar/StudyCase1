@@ -1,9 +1,16 @@
-﻿using StudyCase1.Models;
+﻿using EnrollmentService.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace StudyCase1.Data
+namespace EnrollmentService.Data
 {
-    public interface IEnrollment : ICrud<Enrollment>
+    public interface IEnrollment
     {
-
+        bool SaveChanges();
+        Task<IEnumerable<Enrollment>> GetAllEnrollments();
+        //Enrollment GetEnrollmentById(int id);
+        Task<Enrollment> GetEnrollmentById(string id);
+        Task<Enrollment> CreateEnrollment(Enrollment enroll);
+        Task DeleteEnrollment(string id);
     }
 }

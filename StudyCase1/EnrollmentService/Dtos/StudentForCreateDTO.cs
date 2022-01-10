@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using StudyCase1.ValidationAttributes;
+using EnrollmentService.ValidationAttributes;
 
-namespace StudyCase1.DTO
+namespace EnrollmentService.DTO
 {
     [StudentFirstlastMustBeDiff]
     public class StudentForCreateDTO /*: IValidatableObject*/

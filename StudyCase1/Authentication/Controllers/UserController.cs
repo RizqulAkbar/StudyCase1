@@ -85,11 +85,11 @@ namespace Authentication.Controllers
 
         [AllowAnonymous]
         [HttpPost("Authentication")]
-        public async Task<ActionResult<User>> Authentication(CreateUserDTO createuserDTO)
+        public async Task<ActionResult<User>> Authentication(LoginUserDto loginUserDto)
         {
             try
             {
-                var user = await _user.Authenticate(createuserDTO.Username, createuserDTO.Password);
+                var user = await _user.Authenticate(loginUserDto.Username, loginUserDto.Password);
                 if (user == null)
                     return BadRequest("username/password tidak tepat");
                 return Ok(user);

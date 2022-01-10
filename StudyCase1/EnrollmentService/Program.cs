@@ -7,9 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using StudyCase1.Data;
+using EnrollmentService.Data;
 
-namespace StudyCase1
+namespace EnrollmentService
 {
     public class Program
     {

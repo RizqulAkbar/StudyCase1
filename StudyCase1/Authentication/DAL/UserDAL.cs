@@ -120,7 +120,7 @@ namespace Authentication.DAL
         public async Task<List<string>> GetRolesFromUser(string username)
         {
             List<string> lstRoles = new List<string>();
-            var user = await _userManager.FindByEmailAsync(username);
+            var user = await _userManager.FindByNameAsync(username);
 
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using StudyCase1.Models;
+using EnrollmentService.Models;
 
-namespace StudyCase1.Data
+namespace EnrollmentService.Data
 {
     public interface IStudent : ICrud<Student>
     {

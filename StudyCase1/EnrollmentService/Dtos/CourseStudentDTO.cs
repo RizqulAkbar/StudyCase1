@@ -1,6 +1,6 @@
-﻿using StudyCase1.Models;
+﻿using EnrollmentService.Models;
 
-namespace StudyCase1.DTO
+namespace EnrollmentService.DTO
 {
     public class CourseStudentDTO
     {

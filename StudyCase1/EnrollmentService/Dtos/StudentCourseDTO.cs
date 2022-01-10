@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using StudyCase1.Data;
-using StudyCase1.Models;
+using EnrollmentService.Data;
+using EnrollmentService.Models;
 
-namespace StudyCase1.DTO
+namespace EnrollmentService.DTO
 {
     public class StudentCourseDTO : IValidatableObject
     {

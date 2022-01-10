@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StudyCase1.DTO
+namespace EnrollmentService.DTO
 {
     public class StudentForUpdate
     {

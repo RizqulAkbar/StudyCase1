@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace StudyCase1.DTO
+namespace EnrollmentService.DTO
 {
     public class CourseForCreateDTO  /*: IValidatableObject*/
     {

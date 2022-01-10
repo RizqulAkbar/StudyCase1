@@ -1,47 +1,73 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using StudyCase1.Data;
-using StudyCase1.Models;
+using EnrollmentService.Data;
+using EnrollmentService.Models;
+using System;
+using System.Linq;
 
-namespace StudyCase1.DAL
+namespace EnrollmentService.DAL
 {
     public class EnrollmentDAL : IEnrollment
     {
 
         private ApplicationDbContext _db;
-
         public EnrollmentDAL(ApplicationDbContext db)
         {
             _db = db;
         }
 
-        public Task Delete(string id)
+        public async Task<Enrollment> CreateEnrollment(Enrollment enroll)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                _db.Enrollments.Add(enroll);
+                await _db.SaveChangesAsync();
+                var result = await _db.Enrollments.Include(e => e.Student)
+                .Include(e => e.Course).Where(s => s.EnrollmentID == enroll.EnrollmentID).SingleOrDefaultAsync<Enrollment>();
+                return result;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                throw new Exception($"Error : {dbEx.Message}");
+            }
         }
 
-        public async Task<IEnumerable<Enrollment>> GetAll()
+        public async Task DeleteEnrollment(string id)
+        {
+            var result = await GetEnrollmentById(id);
+            if (result == null) throw new Exception("Data tidak ditemukan !");
+            try
+            {
+                _db.Enrollments.Remove(result);
+                await _db.SaveChangesAsync();
+            }
+            catch (DbUpdateException dbEx)
+            {
+                throw new Exception($"Error: {dbEx.Message}");
+            }
+        }
+
+        public async Task<IEnumerable<Enrollment>> GetAllEnrollments()
         {
             var results = await _db.Enrollments.Include(e => e.Student)
                 .Include(e => e.Course).AsNoTracking().ToListAsync();
             return results;
         }
 
-        public Task<Enrollment> Insert(Enrollment obj)
+        public async Task<Enrollment> GetEnrollmentById(string id)
         {
-            throw new System.NotImplementedException();
+            var result = await _db.Enrollments.Include(e => e.Student)
+                .Include(e => e.Course).Where(s => s.EnrollmentID == Convert.ToInt32(id)).SingleOrDefaultAsync<Enrollment>();
+            if (result != null)
+                return result;
+            else
+                throw new Exception("Data tidak Ditemukan");
         }
 
-
-        public Task<Enrollment> Update(string id, Enrollment obj)
+        public bool SaveChanges()
         {
-            throw new System.NotImplementedException();
-        }
-
-        Task<Enrollment> ICrud<Enrollment>.GetById(string id)
-        {
-            throw new System.NotImplementedException();
+            return (_db.SaveChanges() >= 0);
         }
     }
 }

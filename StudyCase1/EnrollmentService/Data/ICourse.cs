@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
-using StudyCase1.Models;
-using StudyCase1.DTO;
+using EnrollmentService.Models;
+using EnrollmentService.DTO;
 
-namespace StudyCase1.Data
+namespace EnrollmentService.Data
 {
     public interface ICourse : ICrud<Course>
     {

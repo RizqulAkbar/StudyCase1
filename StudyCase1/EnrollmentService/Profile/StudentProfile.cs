@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using StudyCase1.DTO;
-using StudyCase1.Models;
+using EnrollmentService.DTO;
+using EnrollmentService.Models;
 
-namespace StudyCase1.Profiles
+namespace EnrollmentService.Profiles
 {
     public class StudentsProfile : Profile
     {

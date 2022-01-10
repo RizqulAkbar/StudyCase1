@@ -13,27 +13,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text.Json.Serialization;
-using StudyCase1.DAL;
-using StudyCase1.Data;
+using EnrollmentService.DAL;
+using EnrollmentService.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using EnrollmentService.Helpers;
+using EnrollmentService.SyncDataService.Http;
 
-namespace StudyCase1
+namespace EnrollmentService
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfiguration Configuration { get; }
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            if (_env.IsProduction())
+            {
+                Console.WriteLine("--> Using Sql Server Db");
+                services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(
+                    Configuration.GetConnectionString("PlatformsConn")
+                ));
+            }
+            //else
+            //{
+            //    Console.WriteLine("--> Using InMem Db");
+            //    services.AddDbContext<ApplicationDbContext>(
+            //    opt => opt.UseInMemoryDatabase("InMem"));
+            //}
+
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")));
 
@@ -61,6 +78,8 @@ namespace StudyCase1
             services.AddScoped<IStudent, StudentDAL>();
             services.AddScoped<ICourse, CourseDAL>();
             services.AddScoped<IEnrollment, EnrollmentDAL>();
+
+            services.AddHttpClient<IPaymentDataClient, HttpPaymentDataClient>();
 
             //services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -101,7 +120,7 @@ namespace StudyCase1
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StudyCase1 v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EnrollmentService v1"));
             }
 
             app.UseHttpsRedirection();

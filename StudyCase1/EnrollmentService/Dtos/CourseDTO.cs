@@ -1,4 +1,4 @@
-﻿namespace StudyCase1.DTO
+﻿namespace EnrollmentService.DTO
 {
     public class CourseDTO
     {

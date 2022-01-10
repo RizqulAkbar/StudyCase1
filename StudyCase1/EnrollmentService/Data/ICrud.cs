@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace StudyCase1.Data
+namespace EnrollmentService.Data
 {
     public interface ICrud<T>
     {
