@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paymentservice
+  template:
+    metadata:
+      labels:
+        app: paymentservice
+    spec:
+      containers:
+      - name: paymentservice
+        image: rizhy/paymentservice:latest
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payments-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: paymentservice
+  ports:
+  - name: paymentservice
+    protocol: TCP
+    port: 80
+    targetPort: 80
