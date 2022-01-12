@@ -15,6 +15,6 @@ namespace PaymentService.Models
         [Required]
         public string Name { get; set; }
         public ICollection<Payment> Payments { get; set; } =
-            new List<Payment>();
+        new List<Payment>();
     }
 }

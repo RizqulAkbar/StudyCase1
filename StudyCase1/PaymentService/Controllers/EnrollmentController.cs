@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace PaymentService.Controllers
 {
     [ApiController]
-    [Route("api/c/[controller]")]
+    [Route("api/p/[controller]")]
     public class EnrollmentsController : ControllerBase
     {
         private readonly IPaymentRepo _repository;
@@ -21,6 +21,7 @@ namespace PaymentService.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
         public ActionResult<IEnumerable<EnrollmentReadDto>> GetEnrollments()
         {
             Console.WriteLine("-->Ambil Enrollments dari PaymentsService");
@@ -31,7 +32,7 @@ namespace PaymentService.Controllers
         [HttpPost]
         public ActionResult TestIndboundConnection()
         {
-            Console.WriteLine("--> Inbound POST command services");
+            Console.WriteLine("--> Inbound POST payment services");
             return Ok("Inbound test from enrollments controller");
         }
     }

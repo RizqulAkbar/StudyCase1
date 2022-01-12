@@ -14,11 +14,11 @@ namespace PaymentService.Data
                 _context = context;
         }
 
-        public void CreateEnrollment(Enrollment plat)
+        public void CreateEnrollment(Enrollment enroll)
         {
-            if (plat == null)
-                throw new ArgumentNullException(nameof(plat));
-            _context.Enrollments.Add(plat);
+            if (enroll == null)
+                throw new ArgumentNullException(nameof(enroll));
+            _context.Enrollments.Add(enroll);
         }
 
         public void CreatePayment(int enrollmentId, Payment payment)

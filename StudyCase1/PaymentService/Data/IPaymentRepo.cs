@@ -9,7 +9,7 @@ namespace PaymentService.Data
 
         //enrollments
         IEnumerable<Enrollment> GetAllEnrollments();
-        void CreateEnrollment(Enrollment plat);
+        void CreateEnrollment(Enrollment enroll);
         bool EnrollmentExist(int enrollmentid);
         bool ExternalEnrollmentExist(int externalEnrollmentId);
 

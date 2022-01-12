@@ -20,7 +20,7 @@ namespace EnrollmentService.SyncDataService.Http
             _configuration = configuration;
         }
 
-        public async Task SendEnrollmentToPayment(Enrollment enroll)
+        public async Task SendEnrollmentToPayment(EnrollmentReadDto enroll)
         {
             var httpContent = new StringContent(
                 JsonSerializer.Serialize(enroll),
@@ -33,6 +33,8 @@ namespace EnrollmentService.SyncDataService.Http
             }
             else
             {
+                Console.WriteLine(response);
+                Console.WriteLine(httpContent);
                 Console.WriteLine("--> Sync POST to PaymentService failed");
             }
         }

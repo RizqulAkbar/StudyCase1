@@ -6,6 +6,6 @@ namespace EnrollmentService.SyncDataService.Http
 {
     public interface IPaymentDataClient
     {
-        Task SendEnrollmentToPayment(Enrollment enroll);
+        Task SendEnrollmentToPayment(EnrollmentReadDto enroll);
     }
 }

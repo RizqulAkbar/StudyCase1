@@ -41,18 +41,18 @@ namespace EnrollmentService
             {
                 Console.WriteLine("--> Using Sql Server Db");
                 services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(
-                    Configuration.GetConnectionString("PlatformsConn")
+                    Configuration.GetConnectionString("LocalConnection")
                 ));
             }
-            //else
-            //{
-            //    Console.WriteLine("--> Using InMem Db");
-            //    services.AddDbContext<ApplicationDbContext>(
-            //    opt => opt.UseInMemoryDatabase("InMem"));
-            //}
+            else
+            {
+                Console.WriteLine("--> Using InMem Db");
+                services.AddDbContext<ApplicationDbContext>(
+                opt => opt.UseInMemoryDatabase("InMem"));
+            }
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")));
+            // services.AddDbContext<ApplicationDbContext>(options =>
+            // options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")));
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -123,7 +123,7 @@ namespace EnrollmentService
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EnrollmentService v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

@@ -1,6 +1,6 @@
 ﻿namespace PaymentService.Dtos
 {
-    public class GenericEvent
+    public class GenericEventDto
     {
         public string Event { get; set; }
     }

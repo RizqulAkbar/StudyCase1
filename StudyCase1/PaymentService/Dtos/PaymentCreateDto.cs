@@ -4,9 +4,8 @@ namespace PaymentService.Dtos
 {
     public class PaymentCreateDto
     {
-        [Required]
-        public string HowTo { get; set; }
-        [Required]
-        public string CommandLine { get; set; }
+        public int EnrollmentId { get; set; }
+        //public string Name { get; set; }
+        public double TotalAmount { get; set; }
     }
 }

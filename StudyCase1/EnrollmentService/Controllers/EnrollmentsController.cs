@@ -57,19 +57,19 @@ namespace EnrollmentService.Controllers
 
         // POST api/<EnrollmentsController>
         [HttpPost]
-        public async Task<ActionResult<Enrollment>> CreateEnrollment(EnrollmentCreateDto enrollmentCreateDto)
+        public async Task<ActionResult<EnrollmentReadDto>> CreateEnrollment(EnrollmentCreateDto enrollmentCreateDto)
         {
             var enrollmentModel = _mapper.Map<Enrollment>(enrollmentCreateDto);
-            var result = await _enrollment.CreateEnrollment(enrollmentModel);
+            await _enrollment.CreateEnrollment(enrollmentModel);
             _enrollment.SaveChanges();
 
-           // var enrollmentReadDto = _mapper.Map<EnrollmentReadDto>(result);
+           var enrollmentReadDto = _mapper.Map<EnrollmentReadDto>(enrollmentModel);
 
 
             //send sync
             try
             {
-                await _paymentDataClient.SendEnrollmentToPayment(result);
+                await _paymentDataClient.SendEnrollmentToPayment(enrollmentReadDto);
             }
             catch (Exception ex)
             {
@@ -77,7 +77,7 @@ namespace EnrollmentService.Controllers
             }
 
             return CreatedAtRoute(nameof(GetEnrollmentById),
-            new { Id = result.EnrollmentID }, result);
+            new { Id = enrollmentReadDto.EnrollmentId }, enrollmentReadDto);
         }
 
         // PUT api/<EnrollmentsController>/5
