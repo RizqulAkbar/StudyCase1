@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: enrollment-depl
+  name: authentication-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: enrollmentservice
+      app: authentication
   template:
     metadata:
       labels:
-        app: enrollmentservice
+        app: authentication
     spec:
       containers:
-      - name: enrollmentservice
-        image: rizhy/enrollmentservice:latest
+      - name: authentication
+        image: rizhy/authentication:latest
         resources:
           limits:
             memory: "500Mi"
@@ -23,13 +23,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: enrollment-clusterip-srv
+  name: authentication-clusterip-srv
 spec:
   type: ClusterIP
   selector:
-    app: enrollmentservice
+    app: authentication
   ports:
-  - name: enrollmentservice
+  - name: authentication
     protocol: TCP
     port: 80
     targetPort: 80

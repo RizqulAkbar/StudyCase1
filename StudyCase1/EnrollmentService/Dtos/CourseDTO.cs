@@ -1,6 +1,6 @@
-﻿namespace EnrollmentService.DTO
+﻿namespace EnrollmentService.Dtos
 {
-    public class CourseDTO
+    public class CourseDto
     {
         public int CourseID { get; set; }
         public string Title { get; set; }

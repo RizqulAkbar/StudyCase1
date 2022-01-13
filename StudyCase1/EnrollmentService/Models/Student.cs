@@ -15,7 +15,5 @@ namespace EnrollmentService.Models
         [Required]
         public DateTime EnrollmentDate { get; set; }
         public ICollection<Enrollment> Enrollments { get; set; }
-        //public ICollection<Course> Course { get; set; }
-        //public Course Course { get; internal set; }
     }
 }

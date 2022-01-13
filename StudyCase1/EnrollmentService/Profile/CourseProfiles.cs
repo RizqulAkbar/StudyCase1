@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EnrollmentService.DTO;
+using EnrollmentService.Dtos;
 using EnrollmentService.Models;
 
 namespace EnrollmentService.Profiles
@@ -9,11 +9,11 @@ namespace EnrollmentService.Profiles
     {
             public CourseProfiles()
             {
-                CreateMap<Course, CourseDTO>()
+                CreateMap<Course, CourseDto>()
                     .ForMember(dest => dest.TotalHours,
                     opt => opt.MapFrom(src => $"{src.Credits * 1.5}"));
 
-                CreateMap<CourseForCreateDTO, Course>();
+                CreateMap<CourseForCreateDto, Course>();
 
             }
     }

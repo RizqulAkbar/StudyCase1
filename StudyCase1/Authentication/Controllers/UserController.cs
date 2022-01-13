@@ -22,7 +22,7 @@ namespace Authentication.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult> Registration(CreateUserDTO user)
+        public async Task<ActionResult> Registration(CreateUserDto user)
         {
             try
             {
@@ -36,13 +36,13 @@ namespace Authentication.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<UserDTO>> GetAll()
+        public ActionResult<IEnumerable<UserDto>> GetAll()
         {
             return Ok(_user.GetAllUser());
         }
 
         [HttpPost("Role")]
-        public async Task<ActionResult> AddRole(CreateRoleDTO roleDTO)
+        public async Task<ActionResult> AddRole(CreateRoleDto roleDTO)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace Authentication.Controllers
         }
 
         [HttpGet("Role")]
-        public ActionResult<IEnumerable<CreateRoleDTO>> GetAllRole()
+        public ActionResult<IEnumerable<CreateRoleDto>> GetAllRole()
         {
             return Ok(_user.GetRoles());
         }

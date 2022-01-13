@@ -1,8 +1,8 @@
 ﻿using EnrollmentService.Models;
 
-namespace EnrollmentService.DTO
+namespace EnrollmentService.Dtos
 {
-    public class CourseStudentDTO
+    public class CourseStudentDto
     {
         public string Title { get; set; }
         public Student Student { get; set; }

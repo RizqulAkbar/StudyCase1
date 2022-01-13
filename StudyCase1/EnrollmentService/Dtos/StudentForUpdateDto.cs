@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace EnrollmentService.DTO
+namespace EnrollmentService.Dtos
 {
-    public class StudentForUpdate
+    public class StudentForUpdateDto
     {
         public int ID { get; set; }
         public string FirstName { get; set; }

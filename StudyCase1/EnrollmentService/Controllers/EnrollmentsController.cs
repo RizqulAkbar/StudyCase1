@@ -9,8 +9,6 @@ using EnrollmentService.SyncDataService.Http;
 using EnrollmentService.Dtos;
 using System;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace EnrollmentService.Controllers
 {
     [Authorize]
@@ -30,19 +28,14 @@ namespace EnrollmentService.Controllers
             _paymentDataClient = paymentDataClient;
         }
 
-        // GET: api/<EnrollmentsController>
         [HttpGet]
         public async Task<IEnumerable<Enrollment>> GetAllEnrollments()
         {
-            //var results = await _enrollment.GetAll();
-            //return results;
             Console.WriteLine("--> Getting Enrollments .....");
             var enrollmentItem = await _enrollment.GetAllEnrollments();
             return enrollmentItem;
-            //return Ok(_mapper.Map<IEnumerable<EnrollmentReadDto>>(enrollmentItem));
         }
 
-        // GET api/<EnrollmentsController>/5
         [HttpGet("{id}", Name = "GetEnrollmentById")]
         public async Task<ActionResult<Enrollment>> GetEnrollmentById(string id)
         {
@@ -50,12 +43,10 @@ namespace EnrollmentService.Controllers
             if (enrollmentItem != null)
             {
                 return enrollmentItem;
-                //return Ok(_mapper.Map<EnrollmentReadDto>(enrollmentItem));
             }
             return NotFound();
         }
 
-        // POST api/<EnrollmentsController>
         [HttpPost]
         public async Task<ActionResult<EnrollmentReadDto>> CreateEnrollment(EnrollmentCreateDto enrollmentCreateDto)
         {
@@ -80,13 +71,6 @@ namespace EnrollmentService.Controllers
             new { Id = enrollmentReadDto.EnrollmentId }, enrollmentReadDto);
         }
 
-        // PUT api/<EnrollmentsController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        // DELETE api/<EnrollmentsController>/5
         [HttpDelete("{id}", Name = "DeleteEnrollment")]
         public async Task<IActionResult> Delete(int id)
         {

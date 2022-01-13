@@ -8,11 +8,11 @@ using EnrollmentService.Models;
 
 namespace EnrollmentService.DAL
 {
-    public class StudentDAL : IStudent
+    public class StudentDal : IStudent
     {
         private ApplicationDbContext _db;
 
-        public StudentDAL(ApplicationDbContext db)
+        public StudentDal(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -34,9 +34,8 @@ namespace EnrollmentService.DAL
         public async Task<IEnumerable<Student>> GetAll()
         {
             var result = await (from s in _db.Students 
-                                orderby s.ID ascending
+                                orderby s.FirstName ascending
                                 select s).ToListAsync();
-            //_db.Students.OrderBy(s => s.FirstName).ToListAsync();
             return result;
             
         }
@@ -55,15 +54,6 @@ namespace EnrollmentService.DAL
         {
             var result = await _db.Students.Include("Enrollments.Course")
                 .AsNoTracking().ToListAsync();
-            //var result = await (from s in _db.Students
-            //              join e in _db.Enrollments on s.ID equals e.StudentID
-            //              select new Student()
-            //              {
-            //                  ID = s.ID,
-            //                  FirstName = s.FirstName,
-            //                  LastName = s.LastName,
-            //                  Course = e.Course
-            //              }).ToListAsync();
             return result;
         }
 

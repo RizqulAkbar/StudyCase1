@@ -27,13 +27,14 @@ namespace EnrollmentService
                 var services = scope.ServiceProvider;
                 try
                 {
+                    Console.WriteLine("----> Seeding Running");
                     var context = services.GetRequiredService<ApplicationDbContext>();
                     DbInitializer.Initializer(context);
                 }
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "terjadi error ketika membuat database");
+                    logger.LogError(ex, "error when make database");
                 }
             }
         }

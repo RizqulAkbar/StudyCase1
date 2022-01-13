@@ -1,29 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using EnrollmentService.ValidationAttributes;
 
-namespace EnrollmentService.DTO
+namespace EnrollmentService.Dtos
 {
-    [StudentFirstlastMustBeDiff]
-    public class StudentForCreateDTO /*: IValidatableObject*/
+    public class StudentForCreateDto
     {
-        [Required(ErrorMessage = "Kolom FirstName harus diisi")]
+        [Required(ErrorMessage = "FirstName must be inserted")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Kolom lastName harus diisi")]
+        [Required(ErrorMessage = "LastName must be inserted")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Kolom EnrollmentDate harus diisi")]
+        [Required(ErrorMessage = "EnrollmentDate must be inserted")]
         public DateTime EnrollmentDate { get; set; }
-
-        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        //{
-        //    if (FirstName == LastName)
-        //    {
-        //        yield return new ValidationResult("Firstname dan Lastname tidak boleh sama",
-        //            new[] { "StudentForCreateDto" });
-        //    }
-        //}
     }
 }

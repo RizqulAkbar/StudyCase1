@@ -1,7 +1,8 @@
 ﻿namespace Authentication.Dtos
 {
-    public class UserDTO
+    public class UserDto
     {
         public string Username { get; set; }
+        public string Email {get; set;}
     }
 }

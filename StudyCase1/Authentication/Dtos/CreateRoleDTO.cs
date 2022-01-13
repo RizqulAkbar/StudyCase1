@@ -1,6 +1,6 @@
 ﻿namespace Authentication.Dtos
 {
-    public class CreateRoleDTO
+    public class CreateRoleDto
     {
         public string RoleName { get; set; }
     }

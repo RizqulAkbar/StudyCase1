@@ -1,12 +1,10 @@
 ﻿using System;
 
-namespace EnrollmentService.DTO
+namespace EnrollmentService.Dtos
 {
-    public class StudentDTO
+    public class StudentDto
     {
         public int ID { get; set; }
-        //public string FirstName { get; set; }
-        //public string LastName { get; set; }
         public string Name { get; set; }
         public DateTime EnrollmentDate { get; set; }
     }

@@ -1,18 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
 using EnrollmentService.DAL;
 using EnrollmentService.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -26,33 +19,18 @@ namespace EnrollmentService
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        private readonly IWebHostEnvironment _env;
 
-        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _env = env;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            if (_env.IsProduction())
-            {
-                Console.WriteLine("--> Using Sql Server Db");
-                services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(
-                    Configuration.GetConnectionString("LocalConnection")
-                ));
-            }
-            else
-            {
-                Console.WriteLine("--> Using InMem Db");
-                services.AddDbContext<ApplicationDbContext>(
-                opt => opt.UseInMemoryDatabase("InMem"));
-            }
 
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            // options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")));
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("LocalConnection")));
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
@@ -75,9 +53,9 @@ namespace EnrollmentService
                 };
             });
 
-            services.AddScoped<IStudent, StudentDAL>();
-            services.AddScoped<ICourse, CourseDAL>();
-            services.AddScoped<IEnrollment, EnrollmentDAL>();
+            services.AddScoped<IStudent, StudentDal>();
+            services.AddScoped<ICourse, CourseDal>();
+            services.AddScoped<IEnrollment, EnrollmentDal>();
 
             services.AddHttpClient<IPaymentDataClient, HttpPaymentDataClient>();
 

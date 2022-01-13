@@ -4,17 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EnrollmentService.Data;
-using EnrollmentService.DTO;
 using EnrollmentService.Models;
 
 namespace EnrollmentService.DAL
 {
-    public class CourseDAL : ICourse
+    public class CourseDal : ICourse
     {
 
         private ApplicationDbContext _db;
 
-        public CourseDAL(ApplicationDbContext db)
+        public CourseDal(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -39,8 +38,6 @@ namespace EnrollmentService.DAL
             var result = await (from c in _db.Courses
                                 orderby c.CourseID ascending
                                 select c).AsNoTracking().ToListAsync();
-            //_db.Students.OrderBy(s => s.FirstName).ToListAsync();
-            //var result = await _db.Courses.OrderBy(c => c.Title).AsNoTracking().ToListAsync();
             return result;
         }
 
@@ -66,7 +63,6 @@ namespace EnrollmentService.DAL
 
         public async Task<IEnumerable<Course>> GetByTitle(string title)
         {
-            //var result = await _db.Courses.Where(c => c.Title == title).SingleOrDefaultAsync<Course>();
             var result = await (from c in _db.Courses
                                 where c.Title.ToLower().Contains(title.ToLower())
                                 orderby c.CourseID ascending
@@ -109,17 +105,5 @@ namespace EnrollmentService.DAL
                 throw new Exception($"Error: {dbEx.Message}");
             }
         }
-
-        //public IEnumerable<CourseStudent> GetWithStudent()
-        //{
-        //    var results = (from c in _db.Courses
-        //                   join e in _db.Enrollments on c.CourseID equals e.CourseID
-        //                   select new CourseStudent()
-        //                   {
-        //                       Title = c.Title,
-        //                       Student = e.Student
-        //                   }).ToList();
-        //    return results;
-        //}
     }
 }

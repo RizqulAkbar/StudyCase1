@@ -8,11 +8,11 @@ using System.Linq;
 
 namespace EnrollmentService.DAL
 {
-    public class EnrollmentDAL : IEnrollment
+    public class EnrollmentDal : IEnrollment
     {
 
         private ApplicationDbContext _db;
-        public EnrollmentDAL(ApplicationDbContext db)
+        public EnrollmentDal(ApplicationDbContext db)
         {
             _db = db;
         }

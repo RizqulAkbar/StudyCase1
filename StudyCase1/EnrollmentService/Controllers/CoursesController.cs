@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using EnrollmentService.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using EnrollmentService.Data;
 using System.Threading.Tasks;
 using AutoMapper;
-using EnrollmentService.DTO;
 using Microsoft.AspNetCore.Authorization;
+using EnrollmentService.Dtos;
 
 namespace EnrollmentService.Controllers
 {
@@ -27,35 +25,23 @@ namespace EnrollmentService.Controllers
         }
 
         [HttpGet]
-        //public async Task<IEnumerable<Course>> Get()
-        //{
-        //    var results = await _course.GetAll();
-        //    return results;
-        //}
-
-        public async Task<ActionResult<IEnumerable<CourseDTO>>> Get()
+        public async Task<ActionResult<IEnumerable<CourseDto>>> Get()
         {
             var courses = await _course.GetAll();
 
-            return Ok(_mapper.Map<IEnumerable<CourseDTO>>(courses));
+            return Ok(_mapper.Map<IEnumerable<CourseDto>>(courses));
         }
 
 
 
         [HttpGet("{id}")]
-        //public async Task<Course> Get(int id)
-        //{
-        //    var result = await _course.GetById(id.ToString());
-        //    return result;
-        //}
-
         public async Task<ActionResult<Course>> Get(int id)
         {
             var result = await _course.GetById(id.ToString());
             if (result == null)
                 return NotFound();
 
-            return Ok(_mapper.Map<CourseDTO>(result));
+            return Ok(_mapper.Map<CourseDto>(result));
         }
 
 
@@ -75,26 +61,13 @@ namespace EnrollmentService.Controllers
         }
 
         [HttpPost]
-        //public async Task<IActionResult> Post([FromBody] Course course)
-        //{
-        //    try
-        //    {
-        //        var result = await _course.Insert(course);
-        //        return Ok(result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
-        public async Task<ActionResult<CourseDTO>> Post([FromBody] CourseForCreateDTO courseforcreatedto)
+        public async Task<ActionResult<CourseDto>> Post([FromBody] CourseForCreateDto courseforcreatedto)
         {
             try
             {
                 var course = _mapper.Map<Course>(courseforcreatedto);
                 var result = await _course.Insert(course);
-                var courseresult = _mapper.Map<CourseDTO>(result);
+                var courseresult = _mapper.Map<CourseDto>(result);
                 return Ok(courseresult);
             }
             catch (Exception ex)
@@ -104,13 +77,13 @@ namespace EnrollmentService.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<CourseDTO>> Put(int id, [FromBody] CourseForCreateDTO courseforcreatedto)
+        public async Task<ActionResult<CourseDto>> Put(int id, [FromBody] CourseForCreateDto courseforcreatedto)
         {
             try
             {
                 var course = _mapper.Map<Course>(courseforcreatedto);
                 var result = await _course.Update(id.ToString(), course);
-                var studentresult = _mapper.Map<CourseDTO>(result);
+                var studentresult = _mapper.Map<CourseDto>(result);
                 return Ok(studentresult);
             }
             catch (Exception ex)

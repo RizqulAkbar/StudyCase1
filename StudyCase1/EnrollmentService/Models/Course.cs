@@ -12,7 +12,6 @@ namespace EnrollmentService.Models
         [Required]
         public int Credits { get; set; }
 
-        //public ICollection<Enrollment> Enrollments { get; set; }
-        //public Student Student { get; internal set; }
+        public ICollection<Enrollment> Enrollments { get; set; }
     }
 }

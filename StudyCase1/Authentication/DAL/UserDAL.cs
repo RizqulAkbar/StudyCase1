@@ -14,13 +14,13 @@ using System.Threading.Tasks;
 
 namespace Authentication.DAL
 {
-    public class UserDAL : IUser
+    public class UserDal : IUser
     {
         private UserManager<IdentityUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
         private AppSettings _appSettings;
 
-        public UserDAL(UserManager<IdentityUser> userManager,
+        public UserDal(UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager, IOptions<AppSettings> appSettings)
         {
             _userManager = userManager;
@@ -94,25 +94,25 @@ namespace Authentication.DAL
             return user;
         }
 
-        public IEnumerable<UserDTO> GetAllUser()
+        public IEnumerable<UserDto> GetAllUser()
         {
-            List<UserDTO> users = new List<UserDTO>();
+            List<UserDto> users = new List<UserDto>();
             var results = _userManager.Users;
             foreach (var user in results)
             {
-                users.Add(new UserDTO { Username = user.UserName });
+                users.Add(new UserDto { Username = user.UserName, Email = user.Email });
             }
 
             return users;
         }
 
-        public IEnumerable<CreateRoleDTO> GetRoles()
+        public IEnumerable<CreateRoleDto> GetRoles()
         {
-            List<CreateRoleDTO> lstRole = new List<CreateRoleDTO>();
+            List<CreateRoleDto> lstRole = new List<CreateRoleDto>();
             var results = _roleManager.Roles;
             foreach (var role in results)
             {
-                lstRole.Add(new CreateRoleDTO { RoleName = role.Name });
+                lstRole.Add(new CreateRoleDto { RoleName = role.Name });
             }
             return lstRole;
         }
@@ -130,7 +130,7 @@ namespace Authentication.DAL
             return lstRoles;
         }
 
-        public async Task Registration(CreateUserDTO user)
+        public async Task Registration(CreateUserDto user)
         {
             try
             {
@@ -138,7 +138,6 @@ namespace Authentication.DAL
                 {
                     UserName = user.Username,
                     Email = user.Email
-
                 };
                 var result = await _userManager.CreateAsync(newUser, user.Password);
                 if (!result.Succeeded)

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnrollmentService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220110043246_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220113165609_CleanCode")]
+    partial class CleanCode
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,8 +50,8 @@ namespace EnrollmentService.Migrations
                     b.Property<int>("CourseID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Grade")
-                        .HasColumnType("int");
+                    b.Property<string>("Grade")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StudentID")
                         .HasColumnType("int");
@@ -91,7 +91,7 @@ namespace EnrollmentService.Migrations
             modelBuilder.Entity("EnrollmentService.Models.Enrollment", b =>
                 {
                     b.HasOne("EnrollmentService.Models.Course", "Course")
-                        .WithMany()
+                        .WithMany("Enrollments")
                         .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -105,6 +105,11 @@ namespace EnrollmentService.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("EnrollmentService.Models.Course", b =>
+                {
+                    b.Navigation("Enrollments");
                 });
 
             modelBuilder.Entity("EnrollmentService.Models.Student", b =>

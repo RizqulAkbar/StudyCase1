@@ -7,10 +7,10 @@ namespace Authentication.Data
 {
     public interface IUser
     {
-        IEnumerable<UserDTO> GetAllUser();
-        Task Registration(CreateUserDTO user);
+        IEnumerable<UserDto> GetAllUser();
+        Task Registration(CreateUserDto user);
         Task AddRole(string rolename);
-        IEnumerable<CreateRoleDTO> GetRoles();
+        IEnumerable<CreateRoleDto> GetRoles();
         Task AddUserToRole(string username, string role);
         Task<List<string>> GetRolesFromUser(string username);
         Task<User> Authenticate(string username, string password);
